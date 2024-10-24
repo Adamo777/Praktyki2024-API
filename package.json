@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "watch:sass": "npm-run-all --parallel watch:sass:element watch:sass:element2 ",
+    "watch:sass:element": "sass sass/element-style.scss css/element-style.css -w",
+    "watch:sass:element2": "sass sass/element-style.scss css/element-style.css -w"
+  },
+
+  "dependencies": {
+    "sass": "^1.80.4"
+  }
+}
