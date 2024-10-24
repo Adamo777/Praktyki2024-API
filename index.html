@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS FILES -->
+    <link rel="stylesheet" href="./Css/font-face.css" />
+    <link rel="stylesheet" href="./Css/header.css" />
+    <link rel="stylesheet" href="./Css/quiz-section.css" />
+    <!-- CSS FILES -->
     <title>API</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <p class="header__text">Aplikacja Quiz</p>
+      </header>
+
+      <main>
+        <section class="quiz">
+          <div class="quiz__question">
+            <div class="quiz__questionText">
+              <p>Question:</p>
+            </div>
+            <div class="quiz__answersContainer">
+              <label>
+                <input
+                type="radio"
+                class="quiz__answersContainer--answer"
+                />
+                Answer:
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  class="quiz__answersContainer--answer"
+                />
+                Answer:
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  class="quiz__answersContainer--answer"
+                />
+                Answer:
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  class="quiz__answersContainer--answer"
+                />
+                Answer:
+              </label>
+          <input type="Submit" value="Wyślij!" class="quiz__submitBtn">
+        </section>
+      </main>
+    </div>
+    <script src="./Js/answerColorSwapper.js"></script>
+    <script src="./Js/connect.js"></script>
+  </body>
 </html>

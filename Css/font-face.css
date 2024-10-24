@@ -1,0 +1,14 @@
+@font-face {
+    font-family: Metropolis-bold;
+    src: url(/fonts/Metropolis-Black.woff2);
+  }
+  
+  @font-face {
+    font-family: Metropolis-light;
+    src: url(/fonts/Metropolis-Light.woff2);
+  }
+  
+  @font-face {
+    font-family: Metropolis-regular;
+    src: url(/fonts/Metropolis-Regular.woff2);
+  }

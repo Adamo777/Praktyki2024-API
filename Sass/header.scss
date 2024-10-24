@@ -1,0 +1,19 @@
+@use "variables";
+
+.header {
+  background-color: variables.$primary-color;
+  padding: 20px 0;
+}
+
+.header__text {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  margin: 12px;
+  font-family: Metropolis-bold;
+  transition: font-size .3s ease;
+}
+
+.header__text:hover{
+    font-size: 50px;
+}

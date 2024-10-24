@@ -1,11 +1,21 @@
 {
   "scripts": {
-    "watch:sass": "npm-run-all --parallel watch:sass:element watch:sass:element2 ",
-    "watch:sass:element": "sass sass/element-style.scss css/element-style.css -w",
-    "watch:sass:element2": "sass sass/element-style.scss css/element-style.css -w"
+    "watch:sass": "npm-run-all --parallel watch:sass:header watch:sass:quiz-section watch:sass:wrapper",
+    "watch:sass:header": "sass sass/header.scss css/header.css -w",
+    "watch:sass:quiz-section": "sass sass/quiz-section.scss css/quiz-section.css -w",
+    "watch:sass:wrapper": "sass sass/wrapper.scss css/wrapper.css -w"
   },
-
   "dependencies": {
     "sass": "^1.80.4"
-  }
+  },
+  "name": "praktyki2024-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "npm-run-all": "^4.1.5"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
