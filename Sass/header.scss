@@ -1,16 +1,24 @@
 @use "variables";
 
 .header {
-  background-color: variables.$primary-color;
+  background: rgb(6, 95, 144);
+  background: linear-gradient(
+    180deg,
+    rgba(6, 95, 144, 1) 0%,
+    rgba(9, 30, 122, 1) 23%,
+    rgba(9, 14, 122, 1) 50%,
+    rgba(9, 30, 122, 1) 77%,
+    rgba(6, 95, 144, 1) 100%
+  );
   padding: 20px 0;
 }
 
 .header__text {
+  text-align: center;
   font-size: 40px;
   font-weight: bold;
   color: white;
   margin: 12px;
-  font-family: Metropolis-bold;
   transition: font-size .3s ease;
 }
 

@@ -1,75 +1,111 @@
 @use "variables";
 
+
+input[type="radio"] {
+  display: none; 
+}
+
 .quiz {
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-  background-color: #fff;
   padding: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(144, 6, 141, 1) 0%,
+    rgba(173, 20, 154, 1) 23%,
+    rgba(203, 18, 180, 1) 50%,
+    rgba(173, 20, 154, 1) 77%,
+    rgba(144, 6, 141, 1) 100%
+  );
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
 }
 
+/* Question styling */
 .quiz__question {
   position: relative;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid variables.$border-color;
 }
 
-.quiz__question::after {
-  position: absolute;
-  bottom: 0%;
-  content: "___";
-  font-size: 48px;
-  left: 50%;
-  color: variables.$primary-color;
-  transform: translateX(-50%);
-}
-
+/* Question text styling */
 .quiz__questionText {
-  font-family: Metropolis-bold;
-  font-size: 18px;
+  color: white;
+  font-size: 36px;
   margin-bottom: 10px;
+  text-align: center;
 }
 
+/* Answers container styling */
 .quiz__answersContainer {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
+/* Individual answer styling */
 .quiz__answersContainer label {
+  color: white;
   padding: 10px;
-  font-size: 16px;
-  font-family: Metropolis-light;
-  border: 1px solid variables.$border-color;
-  background-color: variables.$answer-bg-color;
-  border-radius: 5px;
+  font-size: 26px;
+  width: 48%;
+  margin-bottom: 30px;
+  border: 3px solid white;
+  text-align: center;
+  // background: linear-gradient(
+  //   180deg,
+  //   rgba(6, 95, 144, 1) 0%,
+  //   rgba(9, 30, 122, 1) 23%,
+  //   rgba(9, 14, 122, 1) 50%,
+  //   rgba(9, 30, 122, 1) 77%,
+  //   rgba(6, 95, 144, 1) 100%
+  // );
   transition: all 0.3s ease;
   cursor: pointer;
+  
+  
 }
 
-.quiz__answersContainer label:hover {
-  background-color: lighten(variables.$primary-color, 40%);
-  border-color: variables.$primary-color;
-  scale: 1.01;
-}
+/* Hover effect for answers */
+// .quiz__answersContainer label:hover {
+//   scale: 1.01;
+//   border-color: rgb(255, 187, 0);
+// }
 
+/* Submit button styling */
 .quiz__submitBtn {
   width: 250px;
   height: 60px;
-  font-family: Metropolis-bold;
   color: white;
   font-size: 25px;
-  background-color: variables.$primary-color;
+  margin: auto;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 95, 144, 1) 0%,
+    rgba(9, 30, 122, 1) 23%,
+    rgba(9, 14, 122, 1) 50%,
+    rgba(9, 30, 122, 1) 77%,
+    rgba(6, 95, 144, 1) 100%
+  );
   text-transform: uppercase;
-  border: none;
+  border: 3px solid white;
   cursor: pointer;
   transition: scale 0.3s ease;
-  margin: auto;
 }
 
+/* Hover effect for submit button */
 .quiz__submitBtn:hover {
   scale: 1.1;
 }
+
+
+.correct {
+  background-color: green;
+  color: white;
+}
+
+.incorrect {
+  background-color: red;
+  color: white;
+}
+

@@ -1,14 +1,15 @@
 .header {
-  background-color: #d32f2f;
+  background: rgb(6, 95, 144);
+  background: linear-gradient(180deg, rgb(6, 95, 144) 0%, rgb(9, 30, 122) 23%, rgb(9, 14, 122) 50%, rgb(9, 30, 122) 77%, rgb(6, 95, 144) 100%);
   padding: 20px 0;
 }
 
 .header__text {
+  text-align: center;
   font-size: 40px;
   font-weight: bold;
   color: white;
   margin: 12px;
-  font-family: Metropolis-bold;
   transition: font-size 0.3s ease;
 }
 
