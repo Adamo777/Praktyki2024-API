@@ -1,7 +1,13 @@
+* {
+  margin: 0;
+}
+
 .wrapper {
-  max-width: 1920px;
-  margin: 0 auto;
-  padding: 20px;
+  font-family: "Franklin Gothic Medium";
+  min-height: 100vh;
+  padding: 3vw;
+  background-color: rgb(2, 0, 36);
+  background: radial-gradient(circle, rgb(2, 0, 36) 0%, rgb(2, 2, 87) 30%, rgb(4, 16, 59) 65%, rgb(2, 0, 36) 100%);
 }
 
 /*# sourceMappingURL=wrapper.css.map */

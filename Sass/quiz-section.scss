@@ -1,111 +1,141 @@
 @use "variables";
 
-
 input[type="radio"] {
-  display: none; 
+  display: none;
 }
 
 .quiz {
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
   padding: 20px;
-  background: linear-gradient(
-    180deg,
-    rgba(144, 6, 141, 1) 0%,
-    rgba(173, 20, 154, 1) 23%,
-    rgba(203, 18, 180, 1) 50%,
-    rgba(173, 20, 154, 1) 77%,
-    rgba(144, 6, 141, 1) 100%
-  );
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Question styling */
-.quiz__question {
-  position: relative;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-}
-
-/* Question text styling */
 .quiz__questionText {
+  display: block;
+  margin-bottom: 40px;
+  padding: 20px;
   color: white;
   font-size: 36px;
-  margin-bottom: 10px;
   text-align: center;
+  border: 3px solid white;
+  border-radius: 20px;
+  background: rgb(52, 43, 217);
+  background: linear-gradient(
+    180deg,
+    rgba(52, 43, 217, 1) 6%,
+    rgba(26, 20, 139, 1) 55%,
+    rgba(5, 0, 107, 1) 90%
+  );
 }
 
-/* Answers container styling */
 .quiz__answersContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-/* Individual answer styling */
 .quiz__answersContainer label {
+  display: flex;
+  margin: 20px 40px;
+  padding: 15px;
+  width: 43%;
   color: white;
-  padding: 10px;
   font-size: 26px;
-  width: 48%;
-  margin-bottom: 30px;
-  border: 3px solid white;
   text-align: center;
-  // background: linear-gradient(
-  //   180deg,
-  //   rgba(6, 95, 144, 1) 0%,
-  //   rgba(9, 30, 122, 1) 23%,
-  //   rgba(9, 14, 122, 1) 50%,
-  //   rgba(9, 30, 122, 1) 77%,
-  //   rgba(6, 95, 144, 1) 100%
-  // );
-  transition: all 0.3s ease;
+  border: 3px solid white;
+  border-radius: 20px;
   cursor: pointer;
-  
-  
+  background: rgb(52, 43, 217);
+  background: linear-gradient(
+    180deg,
+    rgba(52, 43, 217, 1) 6%,
+    rgba(26, 20, 139, 1) 55%,
+    rgba(5, 0, 107, 1) 90%
+  );
+  transition: all 0.3s ease;
 }
 
-/* Hover effect for answers */
-// .quiz__answersContainer label:hover {
-//   scale: 1.01;
-//   border-color: rgb(255, 187, 0);
-// }
+.quiz__answersContainer label:hover {
+  border-color: rgb(255, 196, 0);
+  scale: 1.01;
+}
 
-/* Submit button styling */
+.quiz__answersContainer label.correct {
+  background: rgb(43, 217, 43);
+  background: linear-gradient(
+    180deg,
+    rgba(43, 217, 43, 1) 6%,
+    rgba(36, 139, 20, 1) 55%,
+    rgba(0, 107, 0, 1) 90%
+  );
+  color: white;
+}
+
+.quiz__answersContainer label.incorrect {
+  background: rgb(217, 43, 43);
+  background: linear-gradient(
+    180deg,
+    rgba(217, 43, 43, 1) 6%,
+    rgba(139, 20, 20, 1) 55%,
+    rgba(107, 0, 0, 1) 90%
+  );
+  color: white;
+}
+
+.quiz__answersContainer label.orange {
+  animation: blink 0.75s infinite; 
+  background: rgb(255, 165, 0); 
+  background: linear-gradient(
+    180deg,
+    rgba(255, 165, 0, 1) 6%,
+    rgba(204, 130, 0, 1) 55%,
+    rgba(153, 98, 0, 1) 90%
+  );
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1; 
+  }
+  50% {
+    opacity: 0.7; 
+  }
+  100% {
+    opacity: 1; 
+  }
+}
+
 .quiz__submitBtn {
   width: 250px;
   height: 60px;
+  margin: auto;
   color: white;
   font-size: 25px;
-  margin: auto;
-  background: linear-gradient(
-    180deg,
-    rgba(6, 95, 144, 1) 0%,
-    rgba(9, 30, 122, 1) 23%,
-    rgba(9, 14, 122, 1) 50%,
-    rgba(9, 30, 122, 1) 77%,
-    rgba(6, 95, 144, 1) 100%
-  );
   text-transform: uppercase;
   border: 3px solid white;
   cursor: pointer;
+  background: rgb(154, 43, 217);
+  background: linear-gradient(
+    180deg,
+    rgba(154, 43, 217, 1) 6%,
+    rgba(102, 20, 139, 1) 55%,
+    rgba(70, 0, 107, 1) 90%
+  );
   transition: scale 0.3s ease;
 }
 
-/* Hover effect for submit button */
+.quiz__submitBtn:disabled {
+  background: rgb(204, 204, 204);
+  background: linear-gradient(
+    180deg,
+    rgba(204, 204, 204, 1) 6%,
+    rgba(176, 176, 176, 1) 51%,
+    rgb(138, 138, 138) 90%
+  );
+  cursor: not-allowed;
+  border: 3px solid white;
+}
+
 .quiz__submitBtn:hover {
   scale: 1.1;
 }
-
-
-.correct {
-  background-color: green;
-  color: white;
-}
-
-.incorrect {
-  background-color: red;
-  color: white;
-}
-

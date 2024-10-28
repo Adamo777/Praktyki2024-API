@@ -5,75 +5,101 @@ input[type=radio] {
 .quiz {
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
   padding: 20px;
-  background: linear-gradient(180deg, rgb(144, 6, 141) 0%, rgb(173, 20, 154) 23%, rgb(203, 18, 180) 50%, rgb(173, 20, 154) 77%, rgb(144, 6, 141) 100%);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Question styling */
-.quiz__question {
-  position: relative;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-}
-
-/* Question text styling */
 .quiz__questionText {
+  display: block;
+  margin-bottom: 40px;
+  padding: 20px;
   color: white;
   font-size: 36px;
-  margin-bottom: 10px;
   text-align: center;
+  border: 3px solid white;
+  border-radius: 20px;
+  background: rgb(52, 43, 217);
+  background: linear-gradient(180deg, rgb(52, 43, 217) 6%, rgb(26, 20, 139) 55%, rgb(5, 0, 107) 90%);
 }
 
-/* Answers container styling */
 .quiz__answersContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-/* Individual answer styling */
 .quiz__answersContainer label {
+  display: flex;
+  margin: 20px 40px;
+  padding: 15px;
+  width: 43%;
   color: white;
-  padding: 10px;
   font-size: 26px;
-  width: 48%;
-  margin-bottom: 30px;
-  border: 3px solid white;
   text-align: center;
-  transition: all 0.3s ease;
+  border: 3px solid white;
+  border-radius: 20px;
   cursor: pointer;
+  background: rgb(52, 43, 217);
+  background: linear-gradient(180deg, rgb(52, 43, 217) 6%, rgb(26, 20, 139) 55%, rgb(5, 0, 107) 90%);
+  transition: all 0.3s ease;
 }
 
-/* Hover effect for answers */
-/* Submit button styling */
+.quiz__answersContainer label:hover {
+  border-color: rgb(255, 196, 0);
+  scale: 1.01;
+}
+
+.quiz__answersContainer label.correct {
+  background: rgb(43, 217, 43);
+  background: linear-gradient(180deg, rgb(43, 217, 43) 6%, rgb(36, 139, 20) 55%, rgb(0, 107, 0) 90%);
+  color: white;
+}
+
+.quiz__answersContainer label.incorrect {
+  background: rgb(217, 43, 43);
+  background: linear-gradient(180deg, rgb(217, 43, 43) 6%, rgb(139, 20, 20) 55%, rgb(107, 0, 0) 90%);
+  color: white;
+}
+
+.quiz__answersContainer label.orange {
+  animation: blink 0.75s infinite;
+  background: rgb(255, 165, 0);
+  background: linear-gradient(180deg, rgb(255, 165, 0) 6%, rgb(204, 130, 0) 55%, rgb(153, 98, 0) 90%);
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .quiz__submitBtn {
   width: 250px;
   height: 60px;
+  margin: auto;
   color: white;
   font-size: 25px;
-  margin: auto;
-  background: linear-gradient(180deg, rgb(6, 95, 144) 0%, rgb(9, 30, 122) 23%, rgb(9, 14, 122) 50%, rgb(9, 30, 122) 77%, rgb(6, 95, 144) 100%);
   text-transform: uppercase;
   border: 3px solid white;
   cursor: pointer;
+  background: rgb(154, 43, 217);
+  background: linear-gradient(180deg, rgb(154, 43, 217) 6%, rgb(102, 20, 139) 55%, rgb(70, 0, 107) 90%);
   transition: scale 0.3s ease;
 }
 
-/* Hover effect for submit button */
+.quiz__submitBtn:disabled {
+  background: rgb(204, 204, 204);
+  background: linear-gradient(180deg, rgb(204, 204, 204) 6%, rgb(176, 176, 176) 51%, rgb(138, 138, 138) 90%);
+  cursor: not-allowed;
+  border: 3px solid white;
+}
+
 .quiz__submitBtn:hover {
   scale: 1.1;
-}
-
-.correct {
-  background-color: green;
-  color: white;
-}
-
-.incorrect {
-  background-color: red;
-  color: white;
 }
 
 /*# sourceMappingURL=quiz-section.css.map */
