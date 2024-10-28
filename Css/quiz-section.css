@@ -8,6 +8,13 @@ input[type=radio] {
   padding: 20px;
 }
 
+.quiz__counter {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .quiz__questionText {
   display: block;
   margin-bottom: 40px;
@@ -28,6 +35,7 @@ input[type=radio] {
 }
 
 .quiz__answersContainer label {
+  position: relative;
   display: flex;
   margin: 20px 40px;
   padding: 15px;
@@ -86,8 +94,8 @@ input[type=radio] {
   text-transform: uppercase;
   border: 3px solid white;
   cursor: pointer;
-  background: rgb(154, 43, 217);
-  background: linear-gradient(180deg, rgb(154, 43, 217) 6%, rgb(102, 20, 139) 55%, rgb(70, 0, 107) 90%);
+  background: rgb(63, 120, 251);
+  background: radial-gradient(circle, rgb(63, 120, 251) 0%, rgb(11, 14, 173) 100%);
   transition: scale 0.3s ease;
 }
 

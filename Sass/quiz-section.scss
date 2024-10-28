@@ -10,6 +10,13 @@ input[type="radio"] {
   padding: 20px;
 }
 
+.quiz__counter {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .quiz__questionText {
   display: block;
   margin-bottom: 40px;
@@ -35,6 +42,7 @@ input[type="radio"] {
 }
 
 .quiz__answersContainer label {
+  position: relative;
   display: flex;
   margin: 20px 40px;
   padding: 15px;
@@ -54,6 +62,8 @@ input[type="radio"] {
   );
   transition: all 0.3s ease;
 }
+
+
 
 .quiz__answersContainer label:hover {
   border-color: rgb(255, 196, 0);
@@ -114,13 +124,8 @@ input[type="radio"] {
   text-transform: uppercase;
   border: 3px solid white;
   cursor: pointer;
-  background: rgb(154, 43, 217);
-  background: linear-gradient(
-    180deg,
-    rgba(154, 43, 217, 1) 6%,
-    rgba(102, 20, 139, 1) 55%,
-    rgba(70, 0, 107, 1) 90%
-  );
+  background: rgb(63,120,251);
+  background: radial-gradient(circle, rgba(63,120,251,1) 0%, rgba(11,14,173,1) 100%);
   transition: scale 0.3s ease;
 }
 
