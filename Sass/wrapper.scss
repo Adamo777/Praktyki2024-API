@@ -3,11 +3,10 @@
 }
 
 .wrapper {
+  min-height: 100vh;
+  padding: 20px;
   font-family: 'Franklin Gothic Medium';
   font-weight: bold;
-  min-height: 100vh;
-  padding: 3vw;
-  background-color: rgb(2, 0, 36);
   background: radial-gradient(
     circle,
     rgba(2, 0, 36, 1) 0%,
@@ -15,4 +14,10 @@
     rgba(4, 16, 59, 1) 65%,
     rgba(2, 0, 36, 1) 100%
   );
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

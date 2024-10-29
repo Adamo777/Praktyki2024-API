@@ -3,12 +3,17 @@
 }
 
 .wrapper {
+  min-height: 100vh;
+  padding: 20px;
   font-family: "Franklin Gothic Medium";
   font-weight: bold;
-  min-height: 100vh;
-  padding: 3vw;
-  background-color: rgb(2, 0, 36);
   background: radial-gradient(circle, rgb(2, 0, 36) 0%, rgb(2, 2, 87) 30%, rgb(4, 16, 59) 65%, rgb(2, 0, 36) 100%);
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /*# sourceMappingURL=wrapper.css.map */

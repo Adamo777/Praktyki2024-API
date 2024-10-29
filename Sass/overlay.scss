@@ -1,0 +1,50 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); 
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999; 
+}
+
+.overlay__content {
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  padding: 20px;
+  margin: 30px;
+  border-radius: 10px;
+  border: 3px solid white;
+  background: linear-gradient(
+    180deg,
+    rgba(217, 43, 43, 1) 6%,
+    rgba(139, 20, 20, 1) 55%,
+    rgba(107, 0, 0, 1) 90%
+  );
+}
+
+.retryButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: 3px solid white;
+  border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    rgba(217, 43, 43, 1) 6%,
+    rgba(139, 20, 20, 1) 55%,
+    rgba(107, 0, 0, 1) 90%
+  );
+  color: white;
+  cursor: pointer;
+  transition: scale 0.3s ease;
+}
+
+.retryButton:hover {
+  scale: 1.05;
+}

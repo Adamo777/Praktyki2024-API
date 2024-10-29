@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "watch:sass": "npm-run-all --parallel watch:sass:header watch:sass:quiz-section watch:sass:wrapper watch:sass:money",
-    "watch:sass:header": "sass sass/header.scss css/header.css -w",
+    "watch:sass": "npm-run-all --parallel watch:sass:quiz-section watch:sass:wrapper watch:sass:money watch:sass:overlay",
     "watch:sass:quiz-section": "sass sass/quiz-section.scss css/quiz-section.css -w",
     "watch:sass:wrapper": "sass sass/wrapper.scss css/wrapper.css -w",
-    "watch:sass:money" : "sass sass/money.scss css/money.css -w"
+    "watch:sass:money": "sass sass/money.scss css/money.css -w",
+    "watch:sass:overlay": "sass sass/overlay.scss css/overlay.css -w"
   },
   "dependencies": {
     "sass": "^1.80.4"

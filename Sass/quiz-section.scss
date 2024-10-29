@@ -1,5 +1,3 @@
-@use "variables";
-
 input[type="radio"] {
   display: none;
 }
@@ -7,7 +5,8 @@ input[type="radio"] {
 .quiz {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  justify-content: center;
+  width: 75%;
 }
 
 .quiz__counter {
@@ -26,7 +25,6 @@ input[type="radio"] {
   text-align: center;
   border: 3px solid white;
   border-radius: 20px;
-  background: rgb(52, 43, 217);
   background: linear-gradient(
     180deg,
     rgba(52, 43, 217, 1) 6%,
@@ -39,108 +37,101 @@ input[type="radio"] {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
 
-.quiz__answersContainer label {
-  position: relative;
-  display: flex;
-  margin: 20px 40px;
-  padding: 15px;
-  width: 43%;
-  color: white;
-  font-size: 26px;
-  text-align: center;
-  border: 3px solid white;
-  border-radius: 20px;
-  cursor: pointer;
-  background: rgb(52, 43, 217);
-  background: linear-gradient(
-    180deg,
-    rgba(52, 43, 217, 1) 6%,
-    rgba(26, 20, 139, 1) 55%,
-    rgba(5, 0, 107, 1) 90%
-  );
-  transition: all 0.3s ease;
-}
+  label {
+    margin: 20px;
+    padding: 15px;
+    width: 43%;
+    color: white;
+    font-size: 26px;
+    text-align: center;
+    border: 3px solid white;
+    border-radius: 20px;
+    cursor: pointer;
+    background: linear-gradient(
+      180deg,
+      rgba(52, 43, 217, 1) 6%,
+      rgba(26, 20, 139, 1) 55%,
+      rgba(5, 0, 107, 1) 90%
+    );
+    transition: all 0.3s ease;
 
+    &:hover {
+      border-color: rgb(255, 196, 0);
+      scale: 1.01;
+    }
 
+    &.correct {
+      background: linear-gradient(
+        180deg,
+        rgba(43, 217, 43, 1) 6%,
+        rgba(36, 139, 20, 1) 55%,
+        rgba(0, 107, 0, 1) 90%
+      );
+      color: white;
+    }
 
-.quiz__answersContainer label:hover {
-  border-color: rgb(255, 196, 0);
-  scale: 1.01;
-}
+    &.incorrect {
+      background: linear-gradient(
+        180deg,
+        rgba(217, 43, 43, 1) 6%,
+        rgba(139, 20, 20, 1) 55%,
+        rgba(107, 0, 0, 1) 90%
+      );
+      color: white;
+    }
 
-.quiz__answersContainer label.correct {
-  background: rgb(43, 217, 43);
-  background: linear-gradient(
-    180deg,
-    rgba(43, 217, 43, 1) 6%,
-    rgba(36, 139, 20, 1) 55%,
-    rgba(0, 107, 0, 1) 90%
-  );
-  color: white;
-}
-
-.quiz__answersContainer label.incorrect {
-  background: rgb(217, 43, 43);
-  background: linear-gradient(
-    180deg,
-    rgba(217, 43, 43, 1) 6%,
-    rgba(139, 20, 20, 1) 55%,
-    rgba(107, 0, 0, 1) 90%
-  );
-  color: white;
-}
-
-.quiz__answersContainer label.orange {
-  animation: blink 0.75s infinite; 
-  background: rgb(255, 165, 0); 
-  background: linear-gradient(
-    180deg,
-    rgba(255, 165, 0, 1) 6%,
-    rgba(204, 130, 0, 1) 55%,
-    rgba(153, 98, 0, 1) 90%
-  );
+    &.orange {
+      animation: blink 0.75s infinite;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 165, 0, 1) 6%,
+        rgba(204, 130, 0, 1) 55%,
+        rgba(153, 98, 0, 1) 90%
+      );
+    }
+  }
 }
 
 @keyframes blink {
   0% {
-    opacity: 1; 
+    opacity: 1;
   }
   50% {
-    opacity: 0.7; 
+    opacity: 0.7;
   }
   100% {
-    opacity: 1; 
+    opacity: 1;
   }
 }
 
 .quiz__submitBtn {
   width: 250px;
   height: 60px;
-  margin: auto;
   color: white;
+  margin: auto;
   font-size: 25px;
   text-transform: uppercase;
   border: 3px solid white;
   cursor: pointer;
-  background: rgb(63,120,251);
-  background: radial-gradient(circle, rgba(63,120,251,1) 0%, rgba(11,14,173,1) 100%);
-  transition: scale 0.3s ease;
-}
-
-.quiz__submitBtn:disabled {
-  background: rgb(204, 204, 204);
-  background: linear-gradient(
-    180deg,
-    rgba(204, 204, 204, 1) 6%,
-    rgba(176, 176, 176, 1) 51%,
-    rgb(138, 138, 138) 90%
+  background: radial-gradient(
+    circle,
+    rgba(63, 120, 251, 1) 0%,
+    rgba(11, 14, 173, 1) 100%
   );
-  cursor: not-allowed;
-  border: 3px solid white;
-}
+  transition: scale 0.3s ease;
 
-.quiz__submitBtn:hover {
-  scale: 1.1;
+  &:disabled {
+    background: linear-gradient(
+      180deg,
+      rgba(204, 204, 204, 1) 6%,
+      rgba(176, 176, 176, 1) 51%,
+      rgb(138, 138, 138) 90%
+    );
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    scale: 1.1;
+  }
 }

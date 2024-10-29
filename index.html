@@ -3,22 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>API</title>
 
     <!-- CSS FILES -->
+    <link rel="stylesheet" href="./icon-font/icons.css" />
     <link rel="stylesheet" href="./Css/font-face.css" />
     <link rel="stylesheet" href="./Css/wrapper.css" />
+    <link rel="stylesheet" href="./Css/overlay.css" />
     <link rel="stylesheet" href="./Css/header.css" />
     <link rel="stylesheet" href="./Css/quiz-section.css" />
-    <link rel="stylesheet" href="./Css/money.css">
+    <link rel="stylesheet" href="./Css/money.css" />
     <!-- CSS FILES -->
   </head>
   <body>
     <div class="wrapper">
-      <header class="header">
-        <img src="./WWTBAM.png" alt="Milionerzy logo" />
-      </header>
+      <div class="overlay">
+        <div class="overlay__content"></div>
+        <button class="retryButton">Spróbuj ponownie</button>
+      </div>
 
       <main>
         <section class="quiz">
@@ -26,14 +28,13 @@
             <div class="quiz__counter"></div>
             <p class="quiz__questionText">Question:</p>
             <div class="quiz__answersContainer">
-              <!-- tutaj odpowiedzi -->
+              <!-- Odpowiedzi -->
             </div>
           </div>
           <input type="submit" value="Next" class="quiz__submitBtn" />
         </section>
 
         <section class="money">
-          <div class="help"></div>
           <div class="money__piramid">
             <p class="money__piramidText">1 000 000zł</p>
             <p class="money__piramidText">500 000zł</p>
@@ -48,11 +49,11 @@
             <p class="money__piramidText">1000zł</p>
             <p class="money__piramidText">500zł</p>
           </div>
-
         </section>
       </main>
     </div>
 
     <script src="./Js/connect.js"></script>
+    <script src="./Js/swipeMenu.js"></script>
   </body>
 </html>
