@@ -1,10 +1,10 @@
-"use strict";
+// "use strict";
 
-(function() {
-  const swipeIcon = document.querySelector(".swipeMenu");
-  const moneyTable = document.querySelector(".moneyUnvisible");
+// (function() {
+//   const swipeIcon = document.querySelector(".swipeMenu");
+//   const moneyTable = document.querySelector(".moneyUnvisible");
 
-  swipeIcon.addEventListener("click", () => {
-    moneyTable.classList.toggle("unvisible");
-  });
-})();
+//   swipeIcon.addEventListener("click", () => {
+//     moneyTable.classList.toggle("unvisible");
+//   });
+// })();

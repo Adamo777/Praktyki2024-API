@@ -9,34 +9,72 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.querySelector(".overlay");
   const overlayContent = document.querySelector(".overlay__content");
   const retryButton = document.querySelector(".retryButton");
+  const hintButton = document.querySelector(".money__piramid--buttonFirst");
+  const changeQuestionButton = document.querySelector(
+    ".money__piramid--buttonSecond"
+  );
 
   let quizData = [];
   let currentQuestionIndex = 0;
   let correctAnswersCount = 0;
+  let questionStage = "easy";
+  let difficultyLabel = "Łatwy";
 
-  const fetchQuizData = () => {
-    fetch(
-      "https://opentdb.com/api.php?amount=12&difficulty=medium&type=multiple"
+  const difficultySettings = {
+    easy: { difficulty: "easy", amount: 5, label: "Łatwy", next: "medium" },
+    medium: { difficulty: "medium", amount: 5, label: "Średni", next: "hard" },
+    hard: { difficulty: "hard", amount: 2, label: "Trudny", next: null },
+  };
+
+  const fetchQuizData = (difficulty, amount) => {
+    return fetch(
+      `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`
     )
       .then((response) => response.json())
-      .then((data) => {
-        quizData = data.results;
-        displayQuestion();
-      })
-      .catch((error) => console.error("Fetch error:", error));
+      .then((data) => data.results)
+      .catch((error) => {
+        console.error("Błąd pobierania:", error);
+        return [];
+      });
+  };
+
+  const loadQuestions = () => {
+    const { difficulty, amount, label, next } =
+      difficultySettings[questionStage];
+    difficultyLabel = label;
+
+    fetchQuizData(difficulty, amount).then((data) => {
+      quizData = data;
+      currentQuestionIndex = 0;
+      displayQuestion();
+    });
   };
 
   const displayQuestion = () => {
+    if (currentQuestionIndex >= quizData.length) {
+      questionStage = difficultySettings[questionStage].next;
+      if (questionStage) {
+        loadQuestions();
+      } else {
+        endQuiz();
+      }
+      return;
+    }
+    // const decodeHtmlEntities = (text) => {
+    //   const textarea = document.createElement("textarea");
+    //   textarea.innerHTML = text;
+    //   return textarea.value;
+    // };
+
     const { question, incorrect_answers, correct_answer } =
       quizData[currentQuestionIndex];
     questionText.textContent = question;
-    answersContainer.innerHTML = "";
+    // questionText.textContent = decodeHtmlEntities(question);
 
     const answers = [...incorrect_answers, correct_answer].sort(
       () => Math.random() - 0.5
     );
     answersContainer.append(...createAnswerLabels(answers));
-
     submitButton.disabled = true;
     updateCounter();
   };
@@ -45,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return answers.map((answer) => {
       const answerLabel = document.createElement("label");
       answerLabel.className = "quiz__answer";
-      answerLabel.textContent = answer;
+      answerLabel.textContent = answer; // tutaj
       answerLabel.addEventListener("click", () =>
         checkAnswer(answerLabel, answer)
       );
@@ -54,9 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const updateCounter = () => {
-    counterDisplay.textContent = `Pytanie ${currentQuestionIndex + 1} z ${
-      quizData.length
-    }`;
+    counterDisplay.textContent = `Poziom: ${difficultyLabel} - Pytanie ${
+      currentQuestionIndex + 1
+    } z ${quizData.length}`;
   };
 
   const highlightPyramidLevel = () => {
@@ -84,23 +122,20 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.disabled = false;
       } else {
         highlightCorrectAnswer(correctAnswer);
-        currentQuestionIndex === 0
-          ? showGameOverOverlayWithoutMoney()
-          : showGameOverOverlay();
+        showGameOverOverlay(currentQuestionIndex === 0);
       }
     }, 3000);
   };
 
-  const showGameOverOverlay = () => {
-    overlayContent.textContent = `Niestety przegrałeś! Ilość wygranych pieniędzy: ${
-      moneyPyramid[moneyPyramid.length - correctAnswersCount].textContent
-    }`;
-    overlay.style.display = "flex";
-    submitButton.disabled = true;
-  };
+  const showGameOverOverlay = (withoutMoney) => {
+    if (withoutMoney) {
+      overlayContent.textContent = "Niestety przegrałeś! Spróbuj ponownie.";
+    } else {
+      overlayContent.textContent = `Niestety przegrałeś! Ilość wygranych pieniędzy: ${
+        moneyPyramid[moneyPyramid.length - correctAnswersCount].textContent
+      }`;
+    }
 
-  const showGameOverOverlayWithoutMoney = () => {
-    overlayContent.textContent = "Niestety przegrałeś! Spróbuj ponownie.";
     overlay.style.display = "flex";
     submitButton.disabled = true;
   };
@@ -113,23 +148,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const highlightCorrectAnswer = (correctAnswer) => {
     Array.from(answersContainer.children).forEach((label) => {
-      if (label.textContent === correctAnswer) label.classList.add("correct");
+      if (label.textContent === correctAnswer) {
+        label.classList.add("correct");
+      }
     });
   };
 
-  submitButton.addEventListener("click", () => {
-    if (++currentQuestionIndex < quizData.length) {
+  const changeToNewQuestion = () => {
+    const { difficulty } = difficultySettings[questionStage];
+
+    changeQuestionButton.disabled = true;
+    changeQuestionButton.style.opacity = 0.5;
+
+    fetchQuizData(difficulty, 1).then((data) => {
+      const reserveQuestion = data[0];
+      quizData[currentQuestionIndex] = reserveQuestion;
       displayQuestion();
-    } else {
-      overlayContent.textContent = "Quiz zakończony!";
-      overlay.style.display = "flex";
+    });
+  };
+
+  hintButton.addEventListener("click", () => {
+    const labels = Array.from(answersContainer.children);
+    const incorrectLabels = labels.filter(
+      (label) =>
+        label.textContent !== quizData[currentQuestionIndex].correct_answer
+    );
+
+    if (incorrectLabels.length > 1) {
+      const [firstIncorrect, secondIncorrect] = incorrectLabels
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 2);
+
+      firstIncorrect.classList.add("incorrect");
+      secondIncorrect.classList.add("incorrect");
+      hintButton.disabled = true;
+      hintButton.style.opacity = 0.5;
     }
-    submitButton.disabled = true;
   });
 
-  retryButton.addEventListener("click", () => {
-    location.reload(); 
+  changeQuestionButton.addEventListener("click", changeToNewQuestion);
+  submitButton.addEventListener("click", () => {
+    currentQuestionIndex++;
+    displayQuestion();
   });
 
-  fetchQuizData();
+  retryButton.addEventListener("click", () => location.reload());
+
+  const endQuiz = () => {
+    overlayContent.textContent = "Wygrałeś wszystkie poziomy!";
+    overlay.style.display = "flex";
+  };
+
+  loadQuestions();
 });

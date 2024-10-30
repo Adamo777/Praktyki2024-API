@@ -84,7 +84,7 @@ input[type=radio] {
   border: 3px solid white;
   cursor: pointer;
   background: radial-gradient(circle, rgb(63, 120, 251) 0%, rgb(11, 14, 173) 100%);
-  transition: scale 0.3s ease;
+  transition: all 0.3s ease;
 }
 .quiz__submitBtn:disabled {
   background: linear-gradient(180deg, rgb(204, 204, 204) 6%, rgb(176, 176, 176) 51%, rgb(138, 138, 138) 90%);

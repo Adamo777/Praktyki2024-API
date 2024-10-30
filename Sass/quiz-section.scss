@@ -119,7 +119,7 @@ input[type="radio"] {
     rgba(63, 120, 251, 1) 0%,
     rgba(11, 14, 173, 1) 100%
   );
-  transition: scale 0.3s ease;
+  transition: all 0.3s ease;
 
   &:disabled {
     background: linear-gradient(
