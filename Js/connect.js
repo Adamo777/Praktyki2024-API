@@ -50,6 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  const decodeHtmlEntities = (text) => {
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = text;
+    return textarea.value;
+  };
+
   const displayQuestion = () => {
     if (currentQuestionIndex >= quizData.length) {
       questionStage = difficultySettings[questionStage].next;
@@ -60,12 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return;
     }
-
-    const decodeHtmlEntities = (text) => {
-      const textarea = document.createElement("textarea");
-      textarea.innerHTML = text;
-      return textarea.value;
-    };
 
     const { question, incorrect_answers, correct_answer } =
       quizData[currentQuestionIndex];
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return answers.map((answer) => {
       const answerLabel = document.createElement("label");
       answerLabel.className = "quiz__answer";
-      answerLabel.textContent = answer;
+      answerLabel.textContent = decodeHtmlEntities(answer);
       answerLabel.addEventListener("click", () =>
         checkAnswer(answerLabel, answer)
       );
