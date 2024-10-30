@@ -60,21 +60,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return;
     }
-    // const decodeHtmlEntities = (text) => {
-    //   const textarea = document.createElement("textarea");
-    //   textarea.innerHTML = text;
-    //   return textarea.value;
-    // };
+
+    const decodeHtmlEntities = (text) => {
+      const textarea = document.createElement("textarea");
+      textarea.innerHTML = text;
+      return textarea.value;
+    };
 
     const { question, incorrect_answers, correct_answer } =
       quizData[currentQuestionIndex];
-    questionText.textContent = question;
-    // questionText.textContent = decodeHtmlEntities(question);
+    questionText.textContent = decodeHtmlEntities(question);
+    answersContainer.innerHTML = "";
 
     const answers = [...incorrect_answers, correct_answer].sort(
       () => Math.random() - 0.5
     );
     answersContainer.append(...createAnswerLabels(answers));
+
     submitButton.disabled = true;
     updateCounter();
   };
@@ -83,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return answers.map((answer) => {
       const answerLabel = document.createElement("label");
       answerLabel.className = "quiz__answer";
-      answerLabel.textContent = answer; // tutaj
+      answerLabel.textContent = answer;
       answerLabel.addEventListener("click", () =>
         checkAnswer(answerLabel, answer)
       );
