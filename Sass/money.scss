@@ -13,14 +13,15 @@
   width: 300px;
   display: flex;
   flex-direction: column;
+  margin-left: 15px;
 }
 
-.money__piramidHelp{
+.money__piramidHelp {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 }
 
-.money__piramid--buttonFirst{
+.money__piramid--buttonFirst {
   background: rgb(52, 43, 217);
   background: linear-gradient(
     130deg,
@@ -34,7 +35,7 @@
   margin: 0 20px;
 }
 
-.money__piramid--buttonSecond{
+.money__piramid--buttonSecond {
   background: rgb(52, 43, 217);
   background: linear-gradient(
     130deg,
@@ -49,8 +50,8 @@
 }
 
 .money__piramidHelp i {
-font-size: 50px;
-color: white;
+  font-size: 50px;
+  color: white;
 }
 
 .money__piramidText {
@@ -59,8 +60,16 @@ color: white;
   margin: 8px 0;
   padding: 10px;
   text-align: center;
-  background-color: #2d2d49;
+  color: #ff9100;
   border: 1px solid #ffffff;
+}
+
+.--checkPoint {
+  color: white;
+
+  &::before {
+    content: "● ";
+  }
 }
 
 .highlighted {
@@ -72,15 +81,14 @@ color: white;
   );
   color: #000;
   font-weight: bold;
+  border: 3px solid white;
+}
+
+.icon-arrow-up{
+  font-size: 30px;
+  color: white;
 }
 
 .unvisible {
   display: none;
-}
-
-
-@media only screen and (max-width: 980px) {
-  .money {
-    display: none;
-  }
 }

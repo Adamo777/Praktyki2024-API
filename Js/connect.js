@@ -9,22 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.querySelector(".overlay");
   const overlayContent = document.querySelector(".overlay__content");
   const retryButton = document.querySelector(".retryButton");
+  const overlayWin = document.querySelector(".overlayWin");
+  const overlayWinContent = document.querySelector(".overlayWin__content");
   const hintButton = document.querySelector(".money__piramid--buttonFirst");
   const changeQuestionButton = document.querySelector(
     ".money__piramid--buttonSecond"
   );
 
-  let quizData = [];
-  let currentQuestionIndex = 0;
-  let correctAnswersCount = 0;
-  let questionStage = "easy";
-  let difficultyLabel = "Łatwy";
+  const quizState = {
+    quizData: [],
+    currentQuestionIndex: 0,
+    correctAnswersCount: 0,
+    questionStage: "easy",
+    lastCheckpoint: 0,
+  };
 
   const difficultySettings = {
-    easy: { difficulty: "easy", amount: 5, label: "Łatwy", next: "medium" },
-    medium: { difficulty: "medium", amount: 5, label: "Średni", next: "hard" },
-    hard: { difficulty: "hard", amount: 2, label: "Trudny", next: null },
+    easy: { difficulty: "easy", amount: 5, next: "medium" },
+    medium: { difficulty: "medium", amount: 5, next: "hard" },
+    hard: { difficulty: "hard", amount: 2, next: null },
   };
+
+  const checkpoints = [2000, 40000, 1000000];
 
   const fetchQuizData = (difficulty, amount) => {
     return fetch(
@@ -39,13 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const loadQuestions = () => {
-    const { difficulty, amount, label, next } =
-      difficultySettings[questionStage];
-    difficultyLabel = label;
-
+    const { difficulty, amount } = difficultySettings[quizState.questionStage];
     fetchQuizData(difficulty, amount).then((data) => {
-      quizData = data;
-      currentQuestionIndex = 0;
+      quizState.quizData = data;
+      quizState.currentQuestionIndex = 0;
       displayQuestion();
     });
   };
@@ -57,9 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const displayQuestion = () => {
-    if (currentQuestionIndex >= quizData.length) {
-      questionStage = difficultySettings[questionStage].next;
-      if (questionStage) {
+    if (quizState.currentQuestionIndex >= quizState.quizData.length) {
+      quizState.questionStage =
+        difficultySettings[quizState.questionStage].next;
+      if (quizState.questionStage) {
         loadQuestions();
       } else {
         endQuiz();
@@ -68,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const { question, incorrect_answers, correct_answer } =
-      quizData[currentQuestionIndex];
+      quizState.quizData[quizState.currentQuestionIndex];
     questionText.textContent = decodeHtmlEntities(question);
     answersContainer.innerHTML = "";
 
@@ -94,21 +98,24 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const updateCounter = () => {
-    counterDisplay.textContent = `Poziom: ${difficultyLabel} - Pytanie ${
-      currentQuestionIndex + 1
-    } z ${quizData.length}`;
+    counterDisplay.textContent = `Poziom: ${
+      difficultySettings[quizState.questionStage].difficulty
+    } - Pytanie ${quizState.currentQuestionIndex + 1} z ${
+      quizState.quizData.length
+    }`;
   };
 
   const highlightPyramidLevel = () => {
     moneyPyramid.forEach((level) => level.classList.remove("highlighted"));
-    const reverseIndex = moneyPyramid.length - correctAnswersCount;
-    if (moneyPyramid[reverseIndex]) {
-      moneyPyramid[reverseIndex].classList.add("highlighted");
+    const index = moneyPyramid.length - quizState.correctAnswersCount;
+    if (moneyPyramid[index]) {
+      moneyPyramid[index].classList.add("highlighted");
     }
   };
 
   const checkAnswer = (selectedLabel, selectedAnswer) => {
-    const correctAnswer = quizData[currentQuestionIndex].correct_answer;
+    const correctAnswer =
+      quizState.quizData[quizState.currentQuestionIndex].correct_answer;
     disableAnswerSelection();
     selectedLabel.classList.add("orange");
 
@@ -119,33 +126,43 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       if (selectedAnswer === correctAnswer) {
-        correctAnswersCount++;
+        quizState.correctAnswersCount++;
         highlightPyramidLevel();
-        submitButton.disabled = false;
+
+        if (quizState.correctAnswersCount === moneyPyramid.length) {
+          endQuiz();
+        } else {
+          submitButton.disabled = false;
+        }
+
+        const currentMoneyValue = parseInt(
+          moneyPyramid[moneyPyramid.length - quizState.correctAnswersCount]
+            .textContent
+        );
+
+        if (checkpoints.includes(currentMoneyValue)) {
+          quizState.lastCheckpoint = currentMoneyValue;
+        }
       } else {
         highlightCorrectAnswer(correctAnswer);
-        showGameOverOverlay(currentQuestionIndex === 0);
+        showGameOverOverlay();
       }
     }, 3000);
   };
 
-  const showGameOverOverlay = (withoutMoney) => {
-    if (withoutMoney) {
-      overlayContent.textContent = "Niestety przegrałeś! Spróbuj ponownie.";
-    } else {
-      overlayContent.textContent = `Niestety przegrałeś! Ilość wygranych pieniędzy: ${
-        moneyPyramid[moneyPyramid.length - correctAnswersCount].textContent
-      }`;
-    }
-
+  const showGameOverOverlay = () => {
+    overlayContent.textContent =
+      quizState.lastCheckpoint > 0
+        ? `Niestety przegrałeś! Ilość wygranych pieniędzy: ${quizState.lastCheckpoint} zł`
+        : "Niestety przegrałeś! Spróbuj ponownie.";
     overlay.style.display = "flex";
     submitButton.disabled = true;
   };
 
   const disableAnswerSelection = () => {
-    answersContainer
-      .querySelectorAll("label")
-      .forEach((label) => (label.style.pointerEvents = "none"));
+    answersContainer.querySelectorAll("label").forEach((label) => {
+      label.style.pointerEvents = "none";
+    });
   };
 
   const highlightCorrectAnswer = (correctAnswer) => {
@@ -157,14 +174,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const changeToNewQuestion = () => {
-    const { difficulty } = difficultySettings[questionStage];
-
     changeQuestionButton.disabled = true;
     changeQuestionButton.style.opacity = 0.5;
 
+    const { difficulty } = difficultySettings[quizState.questionStage];
     fetchQuizData(difficulty, 1).then((data) => {
-      const reserveQuestion = data[0];
-      quizData[currentQuestionIndex] = reserveQuestion;
+      quizState.quizData[quizState.currentQuestionIndex] = data[0];
       displayQuestion();
     });
   };
@@ -173,32 +188,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const labels = Array.from(answersContainer.children);
     const incorrectLabels = labels.filter(
       (label) =>
-        label.textContent !== quizData[currentQuestionIndex].correct_answer
+        label.textContent !==
+        quizState.quizData[quizState.currentQuestionIndex].correct_answer
     );
+    const [firstIncorrect, secondIncorrect] = incorrectLabels
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 2);
 
-    if (incorrectLabels.length > 1) {
-      const [firstIncorrect, secondIncorrect] = incorrectLabels
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 2);
-
-      firstIncorrect.classList.add("incorrect");
-      secondIncorrect.classList.add("incorrect");
-      hintButton.disabled = true;
-      hintButton.style.opacity = 0.5;
-    }
+    firstIncorrect.classList.add("incorrect");
+    secondIncorrect.classList.add("incorrect");
+    hintButton.disabled = true;
+    hintButton.style.opacity = 0.5;
   });
 
   changeQuestionButton.addEventListener("click", changeToNewQuestion);
   submitButton.addEventListener("click", () => {
-    currentQuestionIndex++;
+    quizState.currentQuestionIndex++;
     displayQuestion();
   });
 
   retryButton.addEventListener("click", () => location.reload());
 
   const endQuiz = () => {
-    overlayContent.textContent = "Wygrałeś wszystkie poziomy!";
-    overlay.style.display = "flex";
+    overlayWinContent.textContent = "Brawo, Wygrałeś 1 000 000zł!";
+    overlayWin.style.display = "flex";
+    retryButton.style.display = "none";
   };
 
   loadQuestions();

@@ -3,7 +3,6 @@
 }
 
 .wrapper {
-  min-height: 100vh;
   padding: 20px;
   font-family: "Franklin Gothic Medium";
   font-weight: bold;
@@ -12,8 +11,10 @@
 
 main {
   display: flex;
+  min-height: 100vh;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 /*# sourceMappingURL=wrapper.css.map */

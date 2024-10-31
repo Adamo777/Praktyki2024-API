@@ -31,3 +31,6 @@
 .icon-refresh:before {
   content: "\e901";
 }
+.icon-arrow-up:before {
+  content: "\ea32";
+}

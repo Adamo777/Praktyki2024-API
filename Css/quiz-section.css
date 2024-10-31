@@ -47,7 +47,6 @@ input[type=radio] {
   transition: all 0.3s ease;
 }
 .quiz__answersContainer label:hover {
-  border-color: rgb(255, 196, 0);
   scale: 1.01;
 }
 .quiz__answersContainer label.correct {
@@ -78,7 +77,9 @@ input[type=radio] {
   width: 250px;
   height: 60px;
   color: white;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
   font-size: 25px;
   text-transform: uppercase;
   border: 3px solid white;
@@ -89,6 +90,7 @@ input[type=radio] {
 .quiz__submitBtn:disabled {
   background: linear-gradient(180deg, rgb(204, 204, 204) 6%, rgb(176, 176, 176) 51%, rgb(138, 138, 138) 90%);
   cursor: not-allowed;
+  display: none;
 }
 .quiz__submitBtn:hover {
   scale: 1.1;

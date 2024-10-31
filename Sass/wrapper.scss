@@ -3,9 +3,8 @@
 }
 
 .wrapper {
-  min-height: 100vh;
   padding: 20px;
-  font-family: 'Franklin Gothic Medium';
+  font-family: "Franklin Gothic Medium";
   font-weight: bold;
   background: radial-gradient(
     circle,
@@ -18,6 +17,13 @@
 
 main {
   display: flex;
+  min-height: 100vh;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
+
+
+
+
+
